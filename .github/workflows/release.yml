@@ -63,9 +63,20 @@ jobs:
           JAR_FILE=$(find ./target -maxdepth 1 -name "*.jar" ! -name "original*.jar" | head -n 1)
           echo "JAR_FILE=$JAR_FILE" >> $GITHUB_ENV
 
-      - name: Remove older releases with same tag
-        uses: dev-drprasad/delete-tag-and-release@v0.2.1
-        if: ${{ github.event_name == 'push' }}
+      - name: Check if tag exists
+        id: check_tag
+        run: |
+          if git rev-parse --verify "${{ env.TAG_NAME }}" >/dev/null 2>&1; then
+            echo "TAG_EXISTS=true" >> $GITHUB_OUTPUT
+            echo "Tag ${{ env.TAG_NAME }} exists"
+          else
+            echo "TAG_EXISTS=false" >> $GITHUB_OUTPUT
+            echo "Tag ${{ env.TAG_NAME }} does not exist"
+          fi
+
+      - name: Remove older releases (only if tag exists)
+        if: ${{ github.event_name == 'push' && steps.check_tag.outputs.TAG_EXISTS == 'true' }}
+        uses: dev-drprasad/delete-tag-and-release@v1.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
