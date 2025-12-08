@@ -1,0 +1,6 @@
+id: geyserautoupdate
+name: GeyserAutoUpdate
+main: it.frafol.geyserautoupdate.GeyserAutoUpdate
+api: "2.9.1"
+version: 1.0.0
+authors: [frafol]
