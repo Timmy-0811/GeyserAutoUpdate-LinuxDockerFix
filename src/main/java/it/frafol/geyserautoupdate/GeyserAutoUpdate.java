@@ -32,19 +32,10 @@ public class GeyserAutoUpdate implements Extension {
     }
 
     @Subscribe
+    @SneakyThrows
     public void onShutdown(GeyserShutdownEvent event) {
-        try {
-            if (config.extensions != null) {
-                downloadAndReplaceExtensions();
-            }
-
-            if (config.updateCoreEnabled && config.coreDownloadUrl != null && !config.coreDownloadUrl.isBlank()) {
-                downloadAndReplaceCore();
-            }
-
-        } catch (Exception e) {
-            logger.error("Errore durante il processo di update automatico", e);
-        }
+        if (config.extensions != null) downloadAndReplaceExtensions();
+        if (config.updateCoreEnabled && config.coreDownloadUrl != null && !config.coreDownloadUrl.isBlank()) downloadAndReplaceCore();
     }
 
     private static class UpdateConfig {
@@ -111,6 +102,7 @@ public class GeyserAutoUpdate implements Extension {
         URL url = new URL(config.coreDownloadUrl);
         logger.info("Downloading Geyser from URL: " + url);
         Path installDir = dataFolder().resolveSibling("..");
+        if (!config.geyserName.equalsIgnoreCase("Geyser-Standalone")) installDir = dataFolder().resolveSibling("...");
         Path target = installDir.resolve(config.geyserName + ".jar").normalize();
         try (InputStream in = url.openStream()) {
             Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
