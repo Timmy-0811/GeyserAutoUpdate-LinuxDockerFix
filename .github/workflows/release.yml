@@ -74,7 +74,7 @@ jobs:
 
       - name: Create GitHub Release
         id: create_release
-        uses: comnoco/create-release@v2
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -83,7 +83,6 @@ jobs:
           body: GeyserAutoUpdate ${{ env.VERSION }}
           draft: false
           prerelease: false
-          commitish: ${{ github.sha }}
 
       - name: Upload JAR to GitHub Release
         uses: actions/upload-release-asset@v1
