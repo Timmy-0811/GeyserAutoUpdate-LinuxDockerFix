@@ -7,6 +7,12 @@ update-core:
   # Change the URL with the type of your Geyser instance, this URL is only for standalone version.
   download-url: "https://download.geysermc.org/v2/projects/geyser/versions/latest/builds/latest/downloads/standalone"
 
+# By default, the update process will execute at geyser shutdown.
+# By enabling this option, the process will execute on server start and the geyser will restart after.
+# WARNING: If you want to automatically restart Geyser, you need to use a loop in your Geyser start script.
+# Works only on Geyser-Standalone! This is useful if you use some Auto-Restart mechanisms that suppress Geyser process.
+boot: false
+
 extensions:
   - download-url: "https://github.com/frafol/GeyserAutoUpdate/releases/latest/download/GeyserAutoUpdate.jar"
     target-file: "GeyserAutoUpdate.jar"
