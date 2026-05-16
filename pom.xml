@@ -7,7 +7,7 @@
 
     <groupId>it.frafol</groupId>
     <artifactId>GeyserAutoUpdate</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>GeyserAutoUpdate</name>
