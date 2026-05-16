@@ -170,7 +170,7 @@ public class GeyserAutoUpdate implements Extension {
         Path installDir = dataFolder().getParent();
 
         if (!geyserApi().platformType().equals(PlatformType.STANDALONE)) {
-            installDir = installDir.getParent();
+            installDir = installDir.getParent().getParent();
         }
 
         Path target = installDir
