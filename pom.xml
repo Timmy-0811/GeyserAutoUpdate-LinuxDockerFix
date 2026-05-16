@@ -19,8 +19,8 @@
 
     <repositories>
         <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
         <repository>
             <id>geyser-repo</id>
@@ -40,7 +40,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>me.carleslc.Simple-YAML</groupId>
+            <groupId>com.github.CarlosMecha</groupId>
             <artifactId>Simple-Yaml</artifactId>
             <version>1.8.4</version>
         </dependency>
