@@ -40,7 +40,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.CarlosMecha</groupId>
+            <groupId>com.github.Carleslc</groupId>
             <artifactId>Simple-Yaml</artifactId>
             <version>1.8.4</version>
         </dependency>
