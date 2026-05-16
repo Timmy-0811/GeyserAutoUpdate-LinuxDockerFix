@@ -164,13 +164,25 @@ public class GeyserAutoUpdate implements Extension {
     @SneakyThrows
     private void downloadAndReplaceCore() {
         URL url = new URL(config.coreDownloadUrl);
+
         logger.info("Downloading Geyser from URL: " + url);
-        Path installDir = dataFolder().resolveSibling("..");
-        if (!geyserApi().platformType().equals(PlatformType.STANDALONE)) installDir = dataFolder().resolveSibling("...");
-        Path target = installDir.resolve(config.geyserName + ".jar").normalize();
+
+        Path installDir = dataFolder().getParent();
+
+        if (!geyserApi().platformType().equals(PlatformType.STANDALONE)) {
+            installDir = installDir.getParent();
+        }
+
+        Path target = installDir
+                .resolve(config.geyserName + ".jar")
+                .normalize();
+
+        logger.info("Target path: " + target);
+
         try (InputStream in = url.openStream()) {
             Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
         }
+
         logger.info("Geyser has been downloaded successfully.");
     }
 }
